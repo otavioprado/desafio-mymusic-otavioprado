@@ -13,11 +13,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.handson.model.serializer.MusicasListSerializer;
 
 @Entity
 @Table(name = "artistas")
-public class Artistas implements Serializable {
-	
+public class Artista implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -26,7 +27,7 @@ public class Artistas implements Serializable {
 
 	private String nome;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "artistaId", fetch = FetchType.EAGER, targetEntity = Musicas.class)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "artista", fetch = FetchType.EAGER, targetEntity = Musicas.class)
 	@JsonSerialize(using = MusicasListSerializer.class)
 	private List<Musicas> musicas;
 

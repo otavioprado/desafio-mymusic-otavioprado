@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.springframework.validation.annotation.Validated;
 
-import com.handson.model.Artistas;
+import com.handson.model.Artista;
 
 @Validated
 public interface ArtistasService {
 
-    List<Artistas> listarArtistas();
+    List<Artista> listarArtistas();
 
 }

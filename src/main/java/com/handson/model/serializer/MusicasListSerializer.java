@@ -1,4 +1,4 @@
-package com.handson.model;
+package com.handson.model.serializer;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -7,6 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import com.handson.model.Musicas;
 
 public class MusicasListSerializer extends StdSerializer<List<Musicas>> {
 

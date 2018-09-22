@@ -28,14 +28,14 @@ public class Musicas implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ArtistaId", referencedColumnName = "id")
 	@JsonIgnore
-	private Artistas artistaId;
+	private Artista artista;
 
-	public Artistas getArtistaId() {
-		return artistaId;
+	public Artista getArtista() {
+		return artista;
 	}
 
-	public void setArtistaId(Artistas artistaId) {
-		this.artistaId = artistaId;
+	public void setArtista(Artista artista) {
+		this.artista = artista;
 	}
 
 	public String getNome() {
