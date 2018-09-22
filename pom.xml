@@ -1,15 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.handson</groupId>
-	<artifactId>springboot-sqllite-example</artifactId>
+	<name>Otávio Prado: My Music</name>
+	<groupId>com.handson.otavioprado</groupId>
+	<artifactId>mymusic-otavioprado</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
+	
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.1.RELEASE</version>
+		<relativePath />
 	</parent>
 
 	<properties>
@@ -18,42 +22,42 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+	<organization>
+		<name>Otávio Prado</name>
+		<url>http://www.otavioprado.com.br</url>
+	</organization>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+	<modules>
+		<module>musicas</module>
+	</modules>
 
-		<dependency>
-			<groupId>org.xerial</groupId>
-			<artifactId>sqlite-jdbc</artifactId>
-			<version>3.23.1</version>
-		</dependency>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.xerial</groupId>
+				<artifactId>sqlite-jdbc</artifactId>
+				<version>3.23.1</version>
+			</dependency>
 
-		<dependency>
-			<groupId>com.zsoltfabok</groupId>
-			<artifactId>sqlite-dialect</artifactId>
-			<version>1.0</version>
-		</dependency>
+			<dependency>
+				<groupId>com.zsoltfabok</groupId>
+				<artifactId>sqlite-dialect</artifactId>
+				<version>1.0</version>
+			</dependency>
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.8</version>
-		</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.8</version>
+			</dependency>
 
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>26.0-jre</version>
-		</dependency>
-
-	</dependencies>
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>26.0-jre</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<plugins>
