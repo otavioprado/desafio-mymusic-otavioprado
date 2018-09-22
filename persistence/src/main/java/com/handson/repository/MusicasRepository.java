@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.handson.model.Musica;
+import com.handson.model.entities.Musica;
 
 @Repository
 public interface MusicasRepository extends JpaRepository<Musica, String> {

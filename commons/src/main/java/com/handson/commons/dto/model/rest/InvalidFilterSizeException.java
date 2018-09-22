@@ -1,6 +1,6 @@
 package com.handson.commons.dto.model.rest;
 
-import com.handson.exceptions.BusinessException;
+import com.handson.commons.exceptions.BusinessException;
 
 public class InvalidFilterSizeException extends BusinessException {
 	

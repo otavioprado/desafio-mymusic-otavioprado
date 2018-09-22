@@ -1,4 +1,4 @@
-package com.handson.handler;
+package com.handson.commons.handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.handson.commons.dto.ApplicationErrorDTO;
 import com.handson.commons.dto.ResponseDTO;
+import com.handson.commons.exceptions.BusinessException;
 import com.handson.commons.rest.ResponseBuilder;
 import com.handson.commons.rest.ResponseObject;
 import com.handson.commons.rest.ResponseObject.ResponseError;
-import com.handson.exceptions.BusinessException;
 
 @ControllerAdvice
 @PropertySource("classpath:/error_messages.properties")

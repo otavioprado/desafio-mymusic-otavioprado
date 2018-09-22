@@ -1,4 +1,4 @@
-package com.handson.exceptions;
+package com.handson.commons.exceptions;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.ArrayUtils;

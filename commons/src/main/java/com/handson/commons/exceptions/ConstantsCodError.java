@@ -1,4 +1,4 @@
-package com.handson.exceptions;
+package com.handson.commons.exceptions;
 
 public enum ConstantsCodError {
     ERRO_GENERICO("HANDSON-001"),

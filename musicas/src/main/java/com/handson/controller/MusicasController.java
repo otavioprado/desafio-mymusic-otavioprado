@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.handson.commons.exceptions.BusinessException;
+import com.handson.commons.exceptions.ConstantsCodError;
 import com.handson.commons.rest.ResponseBuilder;
 import com.handson.commons.rest.ResponseObject;
-import com.handson.exceptions.BusinessException;
-import com.handson.exceptions.ConstantsCodError;
-import com.handson.model.Musica;
+import com.handson.model.entities.Musica;
 import com.handson.service.MusicaService;
 
 @RestController

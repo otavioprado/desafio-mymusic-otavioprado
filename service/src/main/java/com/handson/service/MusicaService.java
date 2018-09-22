@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
 
-import com.handson.model.Musica;
+import com.handson.model.entities.Musica;
 
 @Validated
 public interface MusicaService {

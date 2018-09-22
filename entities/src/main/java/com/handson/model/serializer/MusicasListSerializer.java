@@ -7,7 +7,7 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.handson.model.Musica;
+import com.handson.model.entities.Musica;
 
 public class MusicasListSerializer extends StdSerializer<List<Musica>> {
 

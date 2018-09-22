@@ -3,9 +3,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-	<name>Otávio Prado: My Music : Service</name>
+	<name>Otávio Prado: My Music : Commons</name>
 	<groupId>com.handson.otavioprado</groupId>
-	<artifactId>service</artifactId>
+	<artifactId>commons</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
@@ -18,11 +18,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.handson.otavioprado</groupId>
-			<artifactId>persistence</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
@@ -31,5 +26,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+		</dependency>
+
 	</dependencies>
 </project>

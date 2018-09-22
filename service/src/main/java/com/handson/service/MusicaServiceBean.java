@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.handson.model.Musica;
+import com.handson.model.entities.Musica;
 import com.handson.repository.MusicasRepository;
 
 @Service

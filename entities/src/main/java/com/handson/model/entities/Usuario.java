@@ -1,4 +1,4 @@
-package com.handson.model;
+package com.handson.model.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

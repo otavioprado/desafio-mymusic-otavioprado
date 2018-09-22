@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.handson.model.Artista;
+import com.handson.model.entities.Artista;
 import com.handson.repository.ArtistasRepository;
 
 @Service

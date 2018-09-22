@@ -22,9 +22,16 @@
 hs_err_pid*
 /target/
 */target/**
+**/bin/**
 
 *.classpath
 *.project
+
+.classpath
+.project
+.settings/
+target/
+bin/
 
 .settings/
 .classpath

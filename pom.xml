@@ -33,6 +33,7 @@
 		<module>entities</module>
 		<module>persistence</module>
 		<module>service</module>
+		<module>commons</module>
 	</modules>
 
 	<dependencyManagement>
@@ -60,6 +61,50 @@
 				<artifactId>guava</artifactId>
 				<version>26.0-jre</version>
 			</dependency>
+
+			<!-- Dependências do projeto -->
+			<dependency>
+				<groupId>com.handson.otavioprado</groupId>
+				<artifactId>mymusic-otavioprado</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.handson.otavioprado</groupId>
+				<artifactId>entities</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.handson.otavioprado</groupId>
+				<artifactId>musicas</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.handson.otavioprado</groupId>
+				<artifactId>persistence</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.handson.otavioprado</groupId>
+				<artifactId>playlist</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.handson.otavioprado</groupId>
+				<artifactId>service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.handson.otavioprado</groupId>
+				<artifactId>commons</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 </project>

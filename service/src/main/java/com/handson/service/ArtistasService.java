@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.validation.annotation.Validated;
 
-import com.handson.model.Artista;
+import com.handson.model.entities.Artista;
 
 @Validated
 public interface ArtistasService {

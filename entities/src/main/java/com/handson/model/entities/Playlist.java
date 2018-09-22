@@ -1,4 +1,4 @@
-package com.handson.model;
+package com.handson.model.entities;
 
 import java.util.List;
 

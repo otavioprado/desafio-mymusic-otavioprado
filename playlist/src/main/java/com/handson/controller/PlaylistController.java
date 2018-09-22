@@ -13,7 +13,7 @@ import com.handson.service.ArtistasService;
 
 @RestController
 @RequestMapping("/api")
-public class ArtistasController {
+public class PlaylistController {
 
 	@Autowired
 	private ArtistasService artistasService;

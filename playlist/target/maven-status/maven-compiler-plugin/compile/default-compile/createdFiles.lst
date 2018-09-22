@@ -1,1 +1,2 @@
-com\handson\Application.class
+com\handson\playlist\Application.class
+com\handson\controller\PlaylistController.class
