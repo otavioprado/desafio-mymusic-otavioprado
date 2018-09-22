@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "playlists")
-public class Playlists {
+public class Playlist {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,13 +25,13 @@ public class Playlists {
 	
 	@OneToOne
     @JoinColumn(name = "usuario_id")
-	private Usuarios usuario;
+	private Usuario usuario;
 	
-	public Usuarios getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuarios usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

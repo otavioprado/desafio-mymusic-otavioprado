@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "usuarios")
-public class Usuarios {
+public class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +18,7 @@ public class Usuarios {
 	
 	@OneToOne
 	@JoinColumn(name = "playlist_id")
-	private Playlists playList;
+	private Playlist playList;
 	
 	private String nome;
 
@@ -38,11 +38,11 @@ public class Usuarios {
 		this.id = id;
 	}
 
-	public Playlists getPlayList() {
+	public Playlist getPlayList() {
 		return playList;
 	}
 
-	public void setPlayList(Playlists playList) {
+	public void setPlayList(Playlist playList) {
 		this.playList = playList;
 	}
 }

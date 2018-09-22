@@ -3,34 +3,44 @@ package com.handson.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.beans.TypeMismatchException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.handson.commons.dto.ApplicationErrorDTO;
 import com.handson.commons.dto.ResponseDTO;
-import com.handson.commons.dto.model.rest.BusinessException;
+import com.handson.commons.rest.ResponseBuilder;
+import com.handson.commons.rest.ResponseObject;
+import com.handson.commons.rest.ResponseObject.ResponseError;
+import com.handson.exceptions.BusinessException;
 
 @ControllerAdvice
+@PropertySource("classpath:/error_messages.properties")
 public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-	private static final String HANDSON_ERROR_001 = "HO-001";
 	private static final String REQUEST = "Request: ";
 	
+	@Autowired
+    private Environment env;
+	
 	private static final Logger LOG = Logger.getLogger(GlobalControllerExceptionHandler.class);
-
+	
 	/**
 	 * Retorno de erro quando é um problema de regra de négocio ou validação sendo
 	 * um response de HttpStatus.BAD_REQUEST [400]
@@ -40,9 +50,15 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
 	 *            em tela
 	 * @return
 	 */
-	private ResponseEntity<ResponseDTO> responseErrorBadRequest(BusinessException exception) {
-		return createResponseError(exception.getCodigo(), exception.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
-	}
+	@ExceptionHandler(BusinessException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseObject<Object> handleSystemException(BusinessException e, HttpServletRequest req) {
+        ResponseError error = new ResponseError();
+        error.setCode(e.getCode());
+        error.setDescription(String.format(env.getProperty(e.getCode(), e.getMessage()), e.getParams()));
+        return new ResponseBuilder<>().withError(error).build();
+    }
 
 	/**
 	 * Create mensagem de resposta de error
@@ -103,11 +119,6 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
 		return REQUEST + req.getDescription(false);
 	}
 
-	private ResponseEntity<Object> invalidParameterError() {
-		return new ResponseEntity<>(criaErrorDTO(HANDSON_ERROR_001, "Parâmetro(s) com formato inválido"),
-				HttpStatus.BAD_REQUEST);
-	}
-
 	/**
 	 * Retorno mensagem Exception handler Exception
 	 *
@@ -118,25 +129,6 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
 	public ResponseEntity<ResponseDTO> messageExceptionHandler(Exception exception, WebRequest req) {
 		LOG.error(getRequest(req), exception);
 		return responseError(exception);
-	}
-
-	/**
-	 * Retorno mensagem Exception handler BusinessException
-	 *
-	 * @param exception
-	 * @return
-	 */
-	@ExceptionHandler(BusinessException.class)
-	public ResponseEntity<ResponseDTO> messageBusinessExceptionHandler(BusinessException exception, WebRequest req) {
-		LOG.error(getRequest(req), exception);
-		return responseErrorBadRequest(exception);
-	}
-
-	@Override
-	protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		return new ResponseEntity<>(criaErrorDTO(HANDSON_ERROR_001, "Campo obrigatório não informado!"),
-				HttpStatus.BAD_REQUEST);
 	}
 
 	@Override
@@ -152,33 +144,5 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
 
 		LOG.error(getRequest(request), ex);
 		return createResponseErrorList(listError);
-	}
-
-	@Override
-	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-		Throwable mostSpecificCause = ex.getMostSpecificCause();
-		LOG.error(getRequest(request), ex);
-
-		if (mostSpecificCause instanceof BusinessException) {
-			BusinessException businessException = (BusinessException) mostSpecificCause;
-			return new ResponseEntity<>(criaErrorDTO(businessException.getCodigo(), businessException.getMessage()),
-					HttpStatus.BAD_REQUEST);
-		}
-
-		return invalidParameterError();
-	}
-
-	@Override
-	protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
-			HttpStatus status, WebRequest request) {
-		return invalidParameterError();
-	}
-
-	@Override
-	protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
-			HttpStatus status, WebRequest request) {
-		return new ResponseEntity<>(criaErrorDTO(HANDSON_ERROR_001, "Erro ao processar requisição!"),
-				HttpStatus.BAD_REQUEST);
 	}
 }

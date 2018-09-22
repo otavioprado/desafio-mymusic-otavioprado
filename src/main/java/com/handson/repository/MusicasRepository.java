@@ -7,12 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.handson.model.Musicas;
+import com.handson.model.Musica;
 
 @Repository
-public interface MusicasRepository extends JpaRepository<Musicas, String> {
+public interface MusicasRepository extends JpaRepository<Musica, String> {
 
-	@Query(value = "SELECT m FROM Musicas m JOIN m.artista a WHERE a.nome = :nomeArtista") 
-    public List<Musicas> findAllByArtistName(@Param("nomeArtista") String filterName);
+	@Query(value = "SELECT m FROM Musica m JOIN m.artista a WHERE a.nome = :nomeArtista") 
+    public List<Musica> findAllByArtistName(@Param("nomeArtista") String filterName);
 	
 }

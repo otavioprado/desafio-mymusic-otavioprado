@@ -11,11 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "musicas")
-public class Musicas implements Serializable {
+public class Musica implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -25,10 +23,11 @@ public class Musicas implements Serializable {
 	
 	private String nome;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ArtistaId", referencedColumnName = "id")
-	@JsonIgnore
 	private Artista artista;
+	
+	private String artistaId;
 
 	public Artista getArtista() {
 		return artista;
@@ -52,5 +51,13 @@ public class Musicas implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getArtistaId() {
+		return artistaId;
+	}
+
+	public void setArtistaId(String artistaId) {
+		this.artistaId = artistaId;
 	}
 }

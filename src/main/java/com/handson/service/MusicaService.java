@@ -7,11 +7,11 @@ import javax.validation.constraints.Size;
 
 import org.springframework.validation.annotation.Validated;
 
-import com.handson.model.Musicas;
+import com.handson.model.Musica;
 
 @Validated
 public interface MusicaService {
 
-    List<Musicas> listarMusicas(@Valid @Size(min = 3, max = 200) String filtro);
+    List<Musica> listarMusicas(@Valid @Size(min = 3, max = 200) String filtro);
 
 }

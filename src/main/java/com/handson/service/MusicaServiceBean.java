@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.handson.model.Musicas;
+import com.handson.model.Musica;
 import com.handson.repository.MusicasRepository;
 
 @Service
@@ -18,7 +18,7 @@ public class MusicaServiceBean implements MusicaService {
 	@Autowired
 	private MusicasRepository musicaRepository;
 
-	public List<Musicas> listarMusicas(String filtro) {
+	public List<Musica> listarMusicas(String filtro) {
 		
 		LOG.info("Iniciando busca de músicas");
 		

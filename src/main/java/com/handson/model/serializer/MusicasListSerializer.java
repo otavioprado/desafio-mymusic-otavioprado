@@ -7,9 +7,9 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.handson.model.Musicas;
+import com.handson.model.Musica;
 
-public class MusicasListSerializer extends StdSerializer<List<Musicas>> {
+public class MusicasListSerializer extends StdSerializer<List<Musica>> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -17,16 +17,16 @@ public class MusicasListSerializer extends StdSerializer<List<Musicas>> {
 		this(null);
 	}
 
-	public MusicasListSerializer(Class<List<Musicas>> t) {
+	public MusicasListSerializer(Class<List<Musica>> t) {
 		super(t);
 	}
 
 	@Override
-	public void serialize(List<Musicas> items, JsonGenerator generator, SerializerProvider provider)
+	public void serialize(List<Musica> items, JsonGenerator generator, SerializerProvider provider)
 			throws IOException {
 
 		List<String> ids = new ArrayList<>();
-		for (Musicas item : items) {
+		for (Musica item : items) {
 			ids.add(item.getNome());
 		}
 		generator.writeObject(ids);
