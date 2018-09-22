@@ -12,7 +12,7 @@ import com.handson.model.Musica;
 @Repository
 public interface MusicasRepository extends JpaRepository<Musica, String> {
 
-	@Query(value = "SELECT m FROM Musica m JOIN m.artista a WHERE a.nome = :nomeArtista") 
+	@Query(value = "SELECT m FROM Musica m JOIN m.artista a WHERE lower(a.nome) = lower(:nomeArtista)") 
     public List<Musica> findAllByArtistName(@Param("nomeArtista") String filterName);
 	
 }
