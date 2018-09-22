@@ -29,6 +29,10 @@
 
 	<modules>
 		<module>musicas</module>
+		<module>playlist</module>
+		<module>entities</module>
+		<module>persistence</module>
+		<module>service</module>
 	</modules>
 
 	<dependencyManagement>
@@ -58,13 +62,4 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>
