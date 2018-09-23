@@ -12,6 +12,6 @@ import com.handson.model.entities.Playlist;
 @Repository
 public interface PlaylistRepository extends JpaRepository<Playlist, String> {
 	
-	@Query(value = "SELECT p FROM Playlist p JOIN p.usuario u WHERE lower(p.usuario.nome) LIKE lower(concat('%', :username,'%'))")
+	@Query(value = "SELECT p FROM Playlist p JOIN p.usuario u WHERE p.usuario.nome = :username")
     public List<Playlist> findAllByUsername(@Param("username") String username);
 }
