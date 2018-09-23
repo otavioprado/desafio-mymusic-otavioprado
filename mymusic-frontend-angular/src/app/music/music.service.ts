@@ -5,6 +5,8 @@ import { List } from 'immutable'
 import { of } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 
+import { ProgressBarService } from '@/components/progress-bar/progress-bar.service'
+
 import { Music } from '@/music/Music'
 
 import { environment } from 'env/environment'
@@ -14,15 +16,20 @@ import { environment } from 'env/environment'
 })
 export class MusicService {
 
-    private API = environment.api.url
+    private API = environment.api.musics
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private progressBarService: ProgressBarService
+    ) { }
 
     public getAllBy(filter: string) {
-        return this.http.get<any[]>(`${this.API}/5ba429072f00006d00968af1?filter=${filter}`)
-            .pipe(switchMap((data: any) => {
+        this.progressBarService.fetching(true)
+        return this.http.get<any[]>(`${this.API}?filtro=${filter}`)
+            .pipe(switchMap(({ data }: any) => {
+                this.progressBarService.fetching(false)
                 let list = List()
-                data.list.forEach(item => list = list.push(new Music(item)))
+                data.forEach(item => list = list.push(new Music(item)))
                 return of(list)
             }))
     }

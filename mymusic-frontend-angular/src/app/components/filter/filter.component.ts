@@ -1,6 +1,6 @@
 import { types } from '@/constants/EventsTypes'
 
-import _ from 'lodash'
+import * as _ from 'lodash'
 
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder } from '@angular/forms'
@@ -19,8 +19,8 @@ export class FilterComponent implements OnInit {
 
     faSearch = faSearch
 
-    filterForm: FormGroup
-    userFilter = ''
+    musicOrPlaylistForm: FormGroup
+    userForm: FormGroup
 
     constructor(
         private eventService: EventService,
@@ -28,24 +28,24 @@ export class FilterComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.filterForm = this.formBuilder.group({
-            musicOrPlaylistFilter: ['']
-        })
+        this.musicOrPlaylistForm = this.formBuilder.group({ musicOrPlaylistFilter: [''] })
+        this.userForm = this.formBuilder.group({ userFilter: [''] })
+    }
+
+    filter(form: FormGroup, type: string, filter: any) {
+        const value = form.get(filter).value
+        if (not(_.isEmpty(value))) {
+            this.eventService.emit(type, { filter: value })
+            form.reset()
+        }
     }
 
     searchByMusicOrPlaylist() {
-        const musicOrPlaylistFilter = this.filterForm.get('musicOrPlaylistFilter').value
-        if (not(_.isEmpty(musicOrPlaylistFilter))) {
-            this.eventService.emit(types.SEARCH_BY_MUSIC_OR_ARTIST, { filter: musicOrPlaylistFilter })
-            this.filterForm.reset()
-        }
+        this.filter(this.musicOrPlaylistForm, types.SEARCH_BY_MUSIC_OR_ARTIST, 'musicOrPlaylistFilter')
     }
 
     searchByUser() {
-        if (not(_.isEmpty(this.userFilter))) {
-            this.eventService.emit(types.SEARCH_BY_USER, { filter: this.userFilter })
-            this.userFilter = ''
-        }
+        this.filter(this.userForm, types.SEARCH_BY_USER, 'userFilter')
      }
 
 }

@@ -12,19 +12,24 @@ export class TableComponent {
 
     @Input() columns = {}
     @Input() list = []
+    @Input() type = ''
 
     @Output() itemSelecionado = new EventEmitter()
 
     private itensSelecionados = List()
 
     selecionado(item) {
-        const itemEncontrado = this.itensSelecionados.toJS().findIndex((i: Music) => i.nome === item.nome)
-        if (itemEncontrado >= 0) {
-            this.itensSelecionados = this.itensSelecionados.delete(itemEncontrado)
+        if (this.type === 'checkbox') {
+            const itemEncontrado = this.itensSelecionados.toJS().findIndex((i: Music) => i.nome === item.nome)
+            if (itemEncontrado >= 0) {
+                this.itensSelecionados = this.itensSelecionados.delete(itemEncontrado)
+            } else {
+                this.itensSelecionados = this.itensSelecionados.push(item)
+            }
+            this.itemSelecionado.emit(this.itensSelecionados)
         } else {
-            this.itensSelecionados = this.itensSelecionados.push(item)
+            this.itemSelecionado.emit(item)
         }
-        this.itemSelecionado.emit(this.itensSelecionados)
     }
 
 }

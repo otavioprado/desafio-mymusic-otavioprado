@@ -3,12 +3,12 @@ import { User } from '@/user/User';
 export class Playlist {
 
     public id: string
-    public playlistMusicas: object[]
+    public musicas: object[]
     public usuario: User
 
-    constructor({ id, playlistMusicas, usuario}) {
+    constructor({ id, musicas, usuario}) {
         this.id = id
-        this.playlistMusicas = playlistMusicas
+        this.musicas = musicas
         this.usuario = usuario
     }
 

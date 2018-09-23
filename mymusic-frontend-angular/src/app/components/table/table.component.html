@@ -1,4 +1,4 @@
-<table class="table mt-5">
+<table class="table mt-5" data-cy="table">
     <thead>
         <tr>
             <th *ngFor="let column of columns">{{ column }}</th>
@@ -6,10 +6,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of list">
+        <tr *ngFor="let item of list" data-cy="table-row">
             <td>{{ item.nome }}</td>
             <td>{{ item.artista.nome }}</td>
-            <td><input class="form-control" (change)="selecionado(item)" type="checkbox"></td>
+            <td><input class="form-control" data-cy="table-select-item" name="item" (change)="selecionado(item)" [type]="type"></td>
         </tr>
     </tbody>
 </table>

@@ -1,17 +1,22 @@
 <div class="row">
     <div class="col-sm-6">
-        <form [formGroup]="filterForm" (submit)="searchByMusicOrPlaylist()">
+        <form [formGroup]="musicOrPlaylistForm" (submit)="searchByMusicOrPlaylist()">
             <div class="input-group">
-                <input class="form-control" formControlName="musicOrPlaylistFilter" placeholder="Music or Artist" type="search">
+                <input class="form-control" data-cy="input-musicOrPlaylistFilter" formControlName="musicOrPlaylistFilter" placeholder="Music or Artist" type="search">
                 <div class="input-group-append">
-                    <button class="btn-primary btn-md pl-4 pr-4" type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
+                    <button class="btn-primary btn-md pl-4 pr-4" data-cy="btn-searchByMusicOrPlaylist" type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
                 </div>
             </div>
         </form>
     </div>
     <div class="col-sm-6">
-        <div class="input-group">
-            <input class="form-control" [(ngModel)]="userFilter" placeholder="User" type="search">
-        </div>
+        <form [formGroup]="userForm" (submit)="searchByUser()">
+            <div class="input-group">
+                <input class="form-control" data-cy="input-userFilter" formControlName="userFilter" placeholder="User" type="search">
+                <div class="input-group-append">
+                    <button class="btn-primary btn-md pl-4 pr-4" data-cy="btn-searchByUser" type="submit"><fa-icon [icon]="faSearch"></fa-icon></button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>

@@ -1,30 +1,56 @@
+import * as _ from 'lodash'
+
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 
-import { List } from 'immutable'
-import { of } from 'rxjs'
-import { switchMap } from 'rxjs/operators'
+import { empty, of } from 'rxjs'
+import { switchMap, tap } from 'rxjs/operators'
 
-import { Playlist } from '@/playlist/Playlist'
+import { Map } from 'immutable'
+
+import { not } from '@/utils/functions'
+
+import { ProgressBarService } from '@/components/progress-bar/progress-bar.service'
 
 import { environment } from 'env/environment'
+
+import { Music } from '@/music/Music'
+import { Playlist } from '@/playlist/Playlist'
 
 @Injectable({
     providedIn: 'root'
 })
 export class PlaylistService {
 
-    private API = environment.api.url
+    private API = environment.api.playlists
 
-    constructor(private http: HttpClient) { }
+    constructor(
+        private http: HttpClient,
+        private progressBarService: ProgressBarService
+    ) { }
+
+    public addMusic(playlistId: string, musics: Music[]) {
+        this.progressBarService.fetching(true)
+        return this.http.put<any>(`${this.API}/${playlistId}/musicas`, musics)
+            .pipe(tap(() => this.progressBarService.fetching(false)))
+    }
 
     public getAllBy(filter: string) {
-        return this.http.get<any[]>(`${this.API}/5ba42b4b2f00005500968af6?filter=${filter}`)
-            .pipe(switchMap((data: any) => {
-                let list = List()
-                data.list.forEach(item => list = list.push(new Playlist(item)))
-                return of(list)
+        this.progressBarService.fetching(true)
+        return this.http.get<any[]>(`${this.API}?user=${filter}`)
+            .pipe(switchMap(({ data }: any) => {
+                this.progressBarService.fetching(false)
+                if (not(_.isEmpty(data))) {
+                    return of(Map(new Playlist(data[0])))
+                }
+                return empty()
             }))
+    }
+
+    public removeMusic(playlistId: string, musicId: string) {
+        this.progressBarService.fetching(true)
+        return this.http.delete<any>(`${this.API}/${playlistId}/musicas/${musicId}`)
+            .pipe(tap(() => this.progressBarService.fetching(false)))
     }
 
 }

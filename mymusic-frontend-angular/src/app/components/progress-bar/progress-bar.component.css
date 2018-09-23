@@ -1,0 +1,22 @@
+.progress-bar.in-progress {
+    background: #b3d9ff;
+    padding: .25rem;
+    position: relative;
+}
+.progress-bar.in-progress::after {
+    animation: fetching 2s cubic-bezier(1, .5, .75, 1) infinite;
+    background: #4da6ff;
+    content: '';
+    padding: .25rem;
+    position: absolute;
+    width: 150px;
+}
+
+@keyframes fetching {
+    0% {
+        left: 0px;
+    }
+    100% {
+        left: 1750px;
+    }
+}

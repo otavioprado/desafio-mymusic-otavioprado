@@ -1,12 +1,18 @@
 <div class="row">
-    <div class="col-sm-5">
-        <app-table [columns]="columns" [list]="musics" (itemSelecionado)="handleMusicSelect($event)"></app-table>
+    <div class="col-sm-12">
+        <div *ngIf="musicError.length" class="alert alert-danger alert-block mt-3" data-cy="music-error">{{ musicError }}</div>
+        <div *ngIf="playlistError.length" class="alert alert-danger alert-block mt-3" data-cy="playlist-error">{{ playlistError }}</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-5" data-cy="table-musics">
+        <app-table [columns]="columns" [list]="musics" (itemSelecionado)="handleMusicSelect($event)" type="checkbox"></app-table>
     </div>
     <div class="col-sm-2 handle-actions">
-        <button class="btn-danger btn-md handle-actions__remove" type="button"><fa-icon [icon]="faAngleDoubleLeft"></fa-icon></button>
-        <button class="btn-success btn-md handle-actions__add" type="button"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></button>
+        <button class="btn-danger btn-md handle-actions__remove" (click)="removeMusic()" data-cy="btn-deleteMusic" type="button"><fa-icon [icon]="faAngleDoubleLeft"></fa-icon></button>
+        <button class="btn-success btn-md handle-actions__add" (click)="addMusic()" data-cy="btn-addMusic" type="button"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></button>
     </div>
-    <div class="col-sm-5">
-        <app-table [columns]="columns" [list]="playlists"></app-table>
+    <div class="col-sm-5" data-cy="table-playlists">
+        <app-table [columns]="columns" [list]="playlist.get('musicas')" (itemSelecionado)="handlePlaylistSelect($event)" type="radio"></app-table>
     </div>
 </div>
