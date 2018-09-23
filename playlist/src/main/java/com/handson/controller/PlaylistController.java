@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,5 +39,13 @@ public class PlaylistController {
 		playlistService.adicionarNovaMusica(playlistId, musica);
 		
 		return new ResponseEntity<Musica>(HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping(value = "/playlists/{playlistId}/musicas/{musicaId}")
+	public ResponseEntity<Musica> listArtistas(@PathVariable String playlistId, @PathVariable String musicaId) throws Exception {
+		
+		playlistService.removerMusica(playlistId, musicaId);
+		
+		return new ResponseEntity<Musica>(HttpStatus.OK);
 	}
 }

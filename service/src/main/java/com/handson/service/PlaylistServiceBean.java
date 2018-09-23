@@ -13,6 +13,7 @@ import com.handson.commons.exceptions.BusinessException;
 import com.handson.commons.exceptions.ConstantsCodError;
 import com.handson.model.entities.Musica;
 import com.handson.model.entities.Playlist;
+import com.handson.repository.MusicaRepository;
 import com.handson.repository.PlaylistRepository;
 
 @Service
@@ -20,6 +21,9 @@ public class PlaylistServiceBean implements PlaylistService {
 
 	@Autowired
 	private PlaylistRepository playlistRepository;
+	
+	@Autowired
+	private MusicaRepository musicaRepository;
 
 	@Override
 	public List<Playlist> listarPlaylists(String filtroUsuario) {
@@ -32,7 +36,7 @@ public class PlaylistServiceBean implements PlaylistService {
 	}
 
 	@Override
-	public void adicionarNovaMusica(String playlistId, Musica musica) throws Exception {
+	public void adicionarNovaMusica(String playlistId, Musica musica) throws BusinessException {
 		Playlist playlist = playlistRepository.findOne(playlistId);
 
 		List<Musica> musicas = playlist.getMusicas();
@@ -49,6 +53,17 @@ public class PlaylistServiceBean implements PlaylistService {
 		} catch (EntityNotFoundException | JpaObjectRetrievalFailureException ex) {
 			throw new BusinessException(ConstantsCodError.MUSICA_NAO_ENCONTRADA);
 		}
+	}
+
+	@Override
+	public void removerMusica(String playlistId, String musicaId) throws BusinessException {
+		Playlist playlist = playlistRepository.findOne(playlistId);
+		Musica musicaToBeRemoved = musicaRepository.findOne(musicaId);
+		
+		List<Musica> musicas = playlist.getMusicas();
+		musicas.remove(musicaToBeRemoved);
+		
+		playlistRepository.save(playlist);
 	}
 
 }

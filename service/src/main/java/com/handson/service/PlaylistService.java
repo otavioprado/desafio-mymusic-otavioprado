@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.validation.annotation.Validated;
 
+import com.handson.commons.exceptions.BusinessException;
 import com.handson.model.entities.Musica;
 import com.handson.model.entities.Playlist;
 
@@ -12,6 +13,8 @@ public interface PlaylistService {
 
     List<Playlist> listarPlaylists(String filtroUsuario);
     
-    void adicionarNovaMusica(String playlistId, Musica musica) throws Exception;
+    void adicionarNovaMusica(String playlistId, Musica musica) throws BusinessException;
+    
+    void removerMusica(String playlistId, String musicaId) throws BusinessException;
 
 }
