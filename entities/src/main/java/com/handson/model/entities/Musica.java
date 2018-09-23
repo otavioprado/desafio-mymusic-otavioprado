@@ -60,4 +60,29 @@ public class Musica implements Serializable {
 	public void setArtistaId(String artistaId) {
 		this.artistaId = artistaId;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((artistaId == null) ? 0 : artistaId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Musica other = (Musica) obj;
+		if (artistaId == null) {
+			if (other.artistaId != null)
+				return false;
+		} else if (!artistaId.equals(other.artistaId))
+			return false;
+		return true;
+	}
 }

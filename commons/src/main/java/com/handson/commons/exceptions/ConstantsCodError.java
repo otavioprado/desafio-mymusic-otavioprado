@@ -2,7 +2,8 @@ package com.handson.commons.exceptions;
 
 public enum ConstantsCodError {
     ERRO_GENERICO("HANDSON-001"),
-    TAMANHO_INVALIDO("HANDSON-002");
+    TAMANHO_INVALIDO("HANDSON-002"),
+    PLAYLIST_JA_TEM_ESSA_MUSICA("HANDSON-003");
 
     private String code;
 
