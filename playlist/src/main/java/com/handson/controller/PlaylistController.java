@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.handson.commons.dto.model.rest.RestReturnDTO;
-import com.handson.model.entities.Artista;
-import com.handson.service.ArtistasService;
+import com.handson.model.entities.Playlist;
+import com.handson.service.PlaylistService;
 
 @RestController
 @RequestMapping("/api")
 public class PlaylistController {
 
 	@Autowired
-	private ArtistasService artistasService;
+	private PlaylistService playlistService;
 
-	@GetMapping(value = "/artistas")
+	@GetMapping(value = "/playlists")
 	public RestReturnDTO listArtistas() {
-		List<Artista> artistas = artistasService.listarArtistas();
+		List<Playlist> playlists = playlistService.listarPlaylists();
 		
-		return new RestReturnDTO(artistas);
+		return new RestReturnDTO(playlists);
 	}
 }

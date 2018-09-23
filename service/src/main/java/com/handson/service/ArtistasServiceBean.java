@@ -9,7 +9,7 @@ import com.handson.model.entities.Artista;
 import com.handson.repository.ArtistasRepository;
 
 @Service
-public class ArtistasServiceBean implements ArtistasService {
+public class ArtistasServiceBean implements ArtistaService {
 
 	@Autowired
 	private ArtistasRepository artistasRepository;

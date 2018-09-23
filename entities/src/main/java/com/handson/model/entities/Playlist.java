@@ -7,26 +7,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "playlists")
 public class Playlist {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private String id;
 
-	@OneToMany
-	@JoinColumn(name = "playlist_musicas_id")
-	private List<PlaylistMusicas> playlistMusicas;
-	
+	@ManyToMany
+	@JoinTable(name = "PlaylistMusicas", joinColumns = @JoinColumn(name = "PlaylistId"), inverseJoinColumns = @JoinColumn(name = "MusicaId"))
+	private List<Musica> musicas;
+
 	@OneToOne
-    @JoinColumn(name = "usuario_id")
+	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
-	
+
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -35,19 +36,19 @@ public class Playlist {
 		this.usuario = usuario;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public List<PlaylistMusicas> getPlaylistMusicas() {
-		return playlistMusicas;
+	public List<Musica> getMusicas() {
+		return musicas;
 	}
 
-	public void setPlaylistMusicas(List<PlaylistMusicas> playlistMusicas) {
-		this.playlistMusicas = playlistMusicas;
+	public void setMusicas(List<Musica> musicas) {
+		this.musicas = musicas;
 	}
 }

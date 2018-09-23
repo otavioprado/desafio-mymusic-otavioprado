@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.handson.commons.dto.model.rest.RestReturnDTO;
 import com.handson.model.entities.Artista;
-import com.handson.service.ArtistasService;
+import com.handson.service.ArtistaService;
 
 @RestController
 @RequestMapping("/api")
 public class ArtistasController {
 
 	@Autowired
-	private ArtistasService artistasService;
+	private ArtistaService artistasService;
 
 	@GetMapping(value = "/artistas")
 	public RestReturnDTO listArtistas() {
