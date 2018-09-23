@@ -9,6 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import com.handson.commons.exceptions.BaseException;
 import com.handson.commons.exceptions.BusinessException;
@@ -45,7 +46,8 @@ public class PlaylistServiceBean implements PlaylistService {
 		List<Musica> playlistMusicas = playlist.getMusicas();
 
 		if (playlistMusicas != null && !Collections.disjoint(playlistMusicas, musicas)) {
-			throw new BusinessException(ConstantsCodError.PLAYLIST_JA_TEM_ESSA_MUSICA, playlistId);
+			Musica musicaNaPlaylist = CollectionUtils.findFirstMatch(musicas, playlistMusicas);
+			throw new BusinessException(ConstantsCodError.PLAYLIST_JA_TEM_ESSA_MUSICA, playlistId, musicaNaPlaylist.getId());
 		}
 		
 		playlistMusicas.addAll(musicas);
