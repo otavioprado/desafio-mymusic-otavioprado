@@ -2,7 +2,9 @@ package com.handson.model.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,8 +26,7 @@ public class Playlist {
 	@JoinTable(name = "PlaylistMusicas", joinColumns = @JoinColumn(name = "PlaylistId"), inverseJoinColumns = @JoinColumn(name = "MusicaId"))
 	private List<Musica> musicas;
 
-	@OneToOne
-	@JoinColumn(name = "usuario_id")
+	@OneToOne(mappedBy = "playlist", cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
 	private Usuario usuario;
 
 	public Usuario getUsuario() {

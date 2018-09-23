@@ -8,18 +8,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private String id;
-	
+
 	@OneToOne
-	@JoinColumn(name = "playlist_id")
-	private Playlist playList;
-	
+	@JoinColumn(name = "PlaylistId")
+	@JsonIgnore
+	private Playlist playlist;
+
+	private String playlistId;
+
 	private String nome;
 
 	public String getNome() {
@@ -38,11 +43,19 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public Playlist getPlayList() {
-		return playList;
+	public Playlist getPlaylist() {
+		return playlist;
 	}
 
-	public void setPlayList(Playlist playList) {
-		this.playList = playList;
+	public void setPlaylist(Playlist playlist) {
+		this.playlist = playlist;
+	}
+
+	public String getPlaylistId() {
+		return playlistId;
+	}
+
+	public void setPlaylistId(String playlistId) {
+		this.playlistId = playlistId;
 	}
 }
