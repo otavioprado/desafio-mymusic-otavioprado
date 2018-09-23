@@ -31,22 +31,22 @@ public class PlaylistController {
 	private ParameterValidator parameterValidator;
 	
 	@GetMapping(value = "/playlists")
-	public RestReturnDTO listArtistas(@RequestParam(value = "user", required = false) String filtroUsuario) {
+	public RestReturnDTO listar(@RequestParam(value = "user", required = false) String filtroUsuario) {
 		List<Playlist> playlists = playlistService.listarPlaylists(filtroUsuario);
 		
 		return new RestReturnDTO(playlists);
 	}
 	
 	@PutMapping(value = "/playlists/{playlistId}/musicas")
-	public ResponseEntity<Musica> listArtistas(@PathVariable String playlistId, @RequestBody Musica musica) throws Exception {
-		parameterValidator.validate(playlistId, musica != null ? musica.getId() : null);
-		playlistService.adicionarNovaMusica(playlistId, musica);
+	public ResponseEntity<Musica> incluir(@PathVariable String playlistId, @RequestBody List<Musica> musicas) throws Exception {
+		parameterValidator.validate(playlistId, musicas);
+		playlistService.adicionar(playlistId, musicas);
 		
 		return new ResponseEntity<Musica>(HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping(value = "/playlists/{playlistId}/musicas/{musicaId}")
-	public ResponseEntity<Musica> listArtistas(@PathVariable String playlistId, @PathVariable String musicaId) throws Exception {
+	public ResponseEntity<Musica> deletar(@PathVariable String playlistId, @PathVariable String musicaId) throws Exception {
 		parameterValidator.validate(playlistId, musicaId);
 		playlistService.removerMusica(playlistId, musicaId);
 		

@@ -1,5 +1,6 @@
 package com.handson.service;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -38,18 +39,17 @@ public class PlaylistServiceBean implements PlaylistService {
 	}
 
 	@Override
-	public void adicionarNovaMusica(String playlistId, Musica musica) throws BaseException {
+	public void adicionar(String playlistId, List<Musica> musicas) throws BaseException {
 		Playlist playlist = playlistRepository.findOne(playlistId);
 
-		List<Musica> musicas = playlist.getMusicas();
+		List<Musica> playlistMusicas = playlist.getMusicas();
 
-		if (musicas != null && musicas.contains(musica)) {
-			throw new BusinessException(ConstantsCodError.PLAYLIST_JA_TEM_ESSA_MUSICA, musica.getNome(),
-					playlist.getUsuario().getNome());
+		if (playlistMusicas != null && !Collections.disjoint(playlistMusicas, musicas)) {
+			throw new BusinessException(ConstantsCodError.PLAYLIST_JA_TEM_ESSA_MUSICA, playlistId);
 		}
-
-		musicas.add(musica);
-
+		
+		playlistMusicas.addAll(musicas);
+		
 		try {
 			playlistRepository.save(playlist);
 		} catch (EntityNotFoundException | JpaObjectRetrievalFailureException ex) {

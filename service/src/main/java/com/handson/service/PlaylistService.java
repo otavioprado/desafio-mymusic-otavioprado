@@ -13,7 +13,7 @@ public interface PlaylistService {
 
     List<Playlist> listarPlaylists(String filtroUsuario);
     
-    void adicionarNovaMusica(String playlistId, Musica musica) throws BaseException;
+    void adicionar(String playlistId, List<Musica> musicas) throws BaseException;
     
     void removerMusica(String playlistId, String musicaId) throws BaseException;
 
