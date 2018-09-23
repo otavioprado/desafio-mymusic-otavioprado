@@ -1,0 +1,15 @@
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th *ngFor="let column of columns">{{ column }}</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of list">
+            <td>{{ item.nome }}</td>
+            <td>{{ item.artista.nome }}</td>
+            <td><input class="form-control" (change)="selecionado(item)" type="checkbox"></td>
+        </tr>
+    </tbody>
+</table>

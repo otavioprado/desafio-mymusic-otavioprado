@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-sm-5">
+        <app-table [columns]="columns" [list]="musics" (itemSelecionado)="handleMusicSelect($event)"></app-table>
+    </div>
+    <div class="col-sm-2 handle-actions">
+        <button class="btn-danger btn-md handle-actions__remove" type="button"><fa-icon [icon]="faAngleDoubleLeft"></fa-icon></button>
+        <button class="btn-success btn-md handle-actions__add" type="button"><fa-icon [icon]="faAngleDoubleRight"></fa-icon></button>
+    </div>
+    <div class="col-sm-5">
+        <app-table [columns]="columns" [list]="playlists"></app-table>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+.handle-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 150px;
+    padding: 0 3rem;
+    text-align: center;
+}
+.handle-actions__remove {
+    margin-bottom: 1rem;
+}
