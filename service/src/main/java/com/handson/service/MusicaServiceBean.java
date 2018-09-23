@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.handson.model.entities.Musica;
-import com.handson.repository.MusicasRepository;
+import com.handson.repository.MusicaRepository;
 
 @Service
 public class MusicaServiceBean implements MusicaService {
@@ -16,7 +16,7 @@ public class MusicaServiceBean implements MusicaService {
 	private static final Logger LOG = Logger.getLogger(MusicaServiceBean.class);
 
 	@Autowired
-	private MusicasRepository musicaRepository;
+	private MusicaRepository musicaRepository;
 
 	public List<Musica> listarMusicas(String filtro) {
 		

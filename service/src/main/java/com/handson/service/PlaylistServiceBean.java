@@ -2,8 +2,11 @@ package com.handson.service;
 
 import java.util.List;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
 import com.handson.commons.exceptions.BusinessException;
@@ -41,7 +44,11 @@ public class PlaylistServiceBean implements PlaylistService {
 
 		musicas.add(musica);
 
-		playlistRepository.save(playlist);
+		try {
+			playlistRepository.save(playlist);
+		} catch (EntityNotFoundException | JpaObjectRetrievalFailureException ex) {
+			throw new BusinessException(ConstantsCodError.MUSICA_NAO_ENCONTRADA);
+		}
 	}
 
 }

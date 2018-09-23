@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.handson.model.entities.Artista;
 
 @Repository
-public interface ArtistasRepository extends JpaRepository<Artista, String> {
+public interface ArtistaRepository extends JpaRepository<Artista, String> {
 
 }
