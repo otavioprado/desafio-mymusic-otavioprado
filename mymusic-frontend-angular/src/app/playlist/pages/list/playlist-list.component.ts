@@ -57,6 +57,8 @@ export class PlaylistListComponent implements OnInit {
                             const musicas = this.playlist.get('musicas') as Music[]
                             this.playlist = this.playlist.set('musicas', musicas.concat(this.musicsSelected.toJS()))
                             this.musicSelected = null
+                        }, ({ error: { error }}) => {
+                            this.musicError = error.description
                         })
                 } else {
                     this.playlistError = 'Você precisa buscar uma playlist para adicioná-la uma música'
