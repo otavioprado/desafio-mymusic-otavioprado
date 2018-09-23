@@ -12,7 +12,8 @@ import com.handson.model.entities.Musica;
 @Repository
 public interface MusicaRepository extends JpaRepository<Musica, String> {
 
-	@Query(value = "SELECT m FROM Musica m JOIN m.artista a WHERE lower(a.nome) LIKE lower(concat('%', :nomeArtista,'%')) ORDER BY a.nome, m.nome") 
-    public List<Musica> findAllByArtistName(@Param("nomeArtista") String filterName);
-	
+	@Query(value = "SELECT m FROM Musica m JOIN m.artista a WHERE lower(a.nome) LIKE lower(concat('%', :nome,'%')) "
+			+ "OR m.nome LIKE lower(concat('%', :nome,'%')) ORDER BY a.nome, m.nome")
+	public List<Musica> findAllByArtistName(@Param("nome") String filterName);
+
 }
