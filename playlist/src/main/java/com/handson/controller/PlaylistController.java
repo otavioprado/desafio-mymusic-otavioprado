@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.handson.commons.dto.model.rest.RestReturnDTO;
+import com.handson.controller.validator.ParameterValidator;
 import com.handson.model.entities.Musica;
 import com.handson.model.entities.Playlist;
 import com.handson.service.PlaylistService;
@@ -26,6 +27,9 @@ public class PlaylistController {
 	@Autowired
 	private PlaylistService playlistService;
 	
+	@Autowired
+	private ParameterValidator parameterValidator;
+	
 	@GetMapping(value = "/playlists")
 	public RestReturnDTO listArtistas(@RequestParam(value = "user", required = false) String filtroUsuario) {
 		List<Playlist> playlists = playlistService.listarPlaylists(filtroUsuario);
@@ -35,7 +39,7 @@ public class PlaylistController {
 	
 	@PutMapping(value = "/playlists/{playlistId}/musicas")
 	public ResponseEntity<Musica> listArtistas(@PathVariable String playlistId, @RequestBody Musica musica) throws Exception {
-		
+		parameterValidator.validate(playlistId, musica != null ? musica.getId() : null);
 		playlistService.adicionarNovaMusica(playlistId, musica);
 		
 		return new ResponseEntity<Musica>(HttpStatus.CREATED);
@@ -43,7 +47,7 @@ public class PlaylistController {
 	
 	@DeleteMapping(value = "/playlists/{playlistId}/musicas/{musicaId}")
 	public ResponseEntity<Musica> listArtistas(@PathVariable String playlistId, @PathVariable String musicaId) throws Exception {
-		
+		parameterValidator.validate(playlistId, musicaId);
 		playlistService.removerMusica(playlistId, musicaId);
 		
 		return new ResponseEntity<Musica>(HttpStatus.OK);

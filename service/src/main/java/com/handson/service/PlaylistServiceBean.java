@@ -38,7 +38,7 @@ public class PlaylistServiceBean implements PlaylistService {
 	}
 
 	@Override
-	public void adicionarNovaMusica(String playlistId, Musica musica) throws BusinessException {
+	public void adicionarNovaMusica(String playlistId, Musica musica) throws BaseException {
 		Playlist playlist = playlistRepository.findOne(playlistId);
 
 		List<Musica> musicas = playlist.getMusicas();
