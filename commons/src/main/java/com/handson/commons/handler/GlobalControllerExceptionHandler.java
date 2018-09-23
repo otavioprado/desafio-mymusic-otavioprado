@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.handson.commons.dto.ApplicationErrorDTO;
 import com.handson.commons.dto.ResponseDTO;
 import com.handson.commons.exceptions.BusinessException;
+import com.handson.commons.exceptions.RecordNotFoundException;
 import com.handson.commons.rest.ResponseBuilder;
 import com.handson.commons.rest.ResponseObject;
 import com.handson.commons.rest.ResponseObject.ResponseError;
@@ -59,6 +60,16 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
         error.setDescription(String.format(env.getProperty(e.getCode(), e.getMessage()), e.getParams()));
         return new ResponseBuilder<>().withError(error).build();
     }
+	
+	@ExceptionHandler(RecordNotFoundException.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseObject<Object> handleSystemNotFoundException(RecordNotFoundException e, HttpServletRequest req) {
+        ResponseError error = new ResponseError();
+        error.setCode(e.getCode());
+        error.setDescription(String.format(env.getProperty(e.getCode(), e.getMessage()), e.getParams()));
+        return new ResponseBuilder<>().withError(error).build();
+    }
 
 	/**
 	 * Create mensagem de resposta de error
@@ -84,7 +95,7 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
 	}
 
 	/**
-	 * Retorno de erro quando é erros desconhecidos, internos do servidor. Sendo um
+	 * Retorno de erro quando é erros desconhecido, interno do servidor. Sendo um
 	 * response de HttpStatus.INTERNAL_SERVER_ERROR [500]
 	 *
 	 * @param exception

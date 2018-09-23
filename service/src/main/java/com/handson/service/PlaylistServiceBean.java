@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.stereotype.Service;
 
+import com.handson.commons.exceptions.BaseException;
 import com.handson.commons.exceptions.BusinessException;
 import com.handson.commons.exceptions.ConstantsCodError;
+import com.handson.commons.exceptions.RecordNotFoundException;
 import com.handson.model.entities.Musica;
 import com.handson.model.entities.Playlist;
 import com.handson.repository.MusicaRepository;
@@ -56,9 +58,15 @@ public class PlaylistServiceBean implements PlaylistService {
 	}
 
 	@Override
-	public void removerMusica(String playlistId, String musicaId) throws BusinessException {
+	public void removerMusica(String playlistId, String musicaId) throws BaseException {
 		Playlist playlist = playlistRepository.findOne(playlistId);
 		Musica musicaToBeRemoved = musicaRepository.findOne(musicaId);
+		
+		if(playlist == null) {
+			throw new RecordNotFoundException(ConstantsCodError.REGISTRO_NAO_ENCONTRADO, "playlist", playlistId);
+		} else if(musicaToBeRemoved == null) {
+			throw new RecordNotFoundException(ConstantsCodError.REGISTRO_NAO_ENCONTRADO, "música", musicaId);
+		}
 		
 		List<Musica> musicas = playlist.getMusicas();
 		musicas.remove(musicaToBeRemoved);
