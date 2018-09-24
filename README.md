@@ -1,7 +1,13 @@
-# Projeto contem as configs necessarias para utilizar a base de dados disponbilizada no projeto MyMusic
+# MyMusic: Otávio Prado
 
-# Para iniciar o desenvolvimento, favor realizar um fork da branch "master" com a seguinte estrutura de nome:
+O projeto pode ser conferido [clicando aqui](http://mymusic-otavioprado-ciandt.s3-website.us-east-2.amazonaws.com/)
 
-# desafio-mymusic-<nome_usuario_github> aonde <nome_usuario_github> e o usuario do candidato logado no github
+## Ferramentas utilizadas
 
-# Os commits devem ser feitos neste fork para que possam ser avaliados
+* [Spring boot](https://spring.io/projects/spring-boot) - Framework para desenvolvimento de aplicações utilizando Spring e Java
+* [Angular](https://angular.io/) - Framework Javascript para as telas do front-end
+* [Maven](https://maven.apache.org/) - Gerenciador de dependências e módulos da aplicação
+* [AWS](https://aws.amazon.com/pt/) - Infraestrutura na Amazon cloud
+* [Swagger](https://swagger.io/) - Documentação das APIs
+* [JUnit](https://junit.org/junit5/) - Framework para testes unitários
+* [Cypress]https://www.cypress.io/) - Framework para testes end-to-end nas telas
